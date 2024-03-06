@@ -63,7 +63,7 @@ async function login (req,res) {
       }
     const{password,...others}= RR1;
     res.cookie("accessToken",token,{
-      HttpOnly:true,
+      HttpOnly:true,  
     }).status(200).json(Total);
     }
     // }

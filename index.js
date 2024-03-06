@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-app.use("/api/upload",upload.single("file"),(req,res)=>{
+app.post("/api/upload",upload.single("file"),(req,res)=>{
     const file=req.file;
     const catlog_name = req.name;
     console.log(file)
