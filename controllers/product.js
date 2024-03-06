@@ -91,6 +91,7 @@ axios.request(options)
     const length = response.data.amazon.items.reduce((a, obj) => a + Object.keys(obj).length, 0) / 6;
     var namescore = 8;
     let confidence = 0;
+    let totalscore = 0;
 
     response.data.amazon.items.forEach(obj => {
         console.log("Label:", obj.label);
@@ -104,7 +105,17 @@ axios.request(options)
     const totalconfidence = Math.round(confidence * 10) / 10;
 
     console.log(totalconfidence/length);
-    console.log(namescore);
+    const a = Math.round((totalconfidence / length) * 10) / 10; 
+       if (a > 0.05) {
+        totalscore = totalscore + namescore + 10;
+       }
+       else {
+        totalscore = totalscore + namescore + 4;
+       }
+
+    // console.log(namescore);
+
+    return totalscore;
 
 })
 

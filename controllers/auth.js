@@ -56,11 +56,15 @@ async function login (req,res) {
       if(!checkPassword) return res.status(400).json("Wrong password or username!")
       console.log(RR1._id);
       const token=jwt.sign({id:RR1._id},"secretkey")
-      console.log(token)
+      console.log(token);
+      const Total = {
+        RR1,
+        token: `${token}`
+      }
     const{password,...others}= RR1;
     res.cookie("accessToken",token,{
-      httpOnly:true,
-    }).status(200).json(RR1);
+      HttpOnly:true,
+    }).status(200).json(Total);
     }
     // }
  
