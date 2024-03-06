@@ -37,7 +37,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
         imgurl: product.imgURL
        };
 
-       const Score = calculate_score(Data);
+       const Score = await calculate_score(Data);
 
     const RR2 = await R1.findOneAndUpdate({
         userid: userInfo.id,
