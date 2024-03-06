@@ -65,7 +65,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
  // write all the logic for calculating score
 
  const score1 = getImageScore(data.name, data.imgurl);
- let totalscore;
+ let totalscore = 0;
 
  if (data.desc) totalscore + 3;
  if (data.location) totalscore += 4;
@@ -75,6 +75,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
  if (data.price) totalscore += 1;
  totalscore += score1;
 
+ console.log(totalscore);
  return Math.random(totalscore * 10) /10;
 }
 
@@ -98,7 +99,7 @@ const options = {
 axios.request(options)
 .then((response) => {
     // get  object from response and check if it is an image
-    console.log(response.data.amazon.items);
+    // console.log(response.data.amazon.items);
     const length = response.data.amazon.items.reduce((a, obj) => a + Object.keys(obj).length, 0) / 6;
     var namescore = 8;
     let confidence = 0;
