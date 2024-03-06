@@ -61,10 +61,10 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
 })
 }
 
- function calculate_score (data) {
+async function calculate_score (data) {
     // write all the logic for calculating score
   
-    const score1 = getImageScore(data.name, data.imgurl);
+    const score1 = await getImageScore(data.name, data.imgurl);
     console.log("data coming" + score1);
     let totalscore = 0; // Initialize totalscore to 0
   
