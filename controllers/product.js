@@ -61,10 +61,10 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
 })
 }
 
- function calculate_score (data) {
+ async function calculate_score (data) {
  // write all the logic for calculating score
 
- const score1 = getImageScore(data.name, data.imgurl);
+ const score1 = await getImageScore(data.name, data.imgurl);
  let totalscore = 0;
 
  if (data.desc) totalscore + 3;
@@ -106,8 +106,8 @@ axios.request(options)
     let totalscore = 0;
 
     response.data.amazon.items.forEach(obj => {
-        console.log("Label:", obj.label);
-        console.log("Confidence:", obj.confidence);
+        // console.log("Label:", obj.label);
+        // console.log("Confidence:", obj.confidence);
         if (obj.label == name) {
                     namescore = 15;
                 }
@@ -119,6 +119,7 @@ axios.request(options)
     console.log(totalconfidence/length);
     const a = Math.round((totalconfidence / length) * 10) / 10; 
        if (a > 0.50) {
+        console.log(a);
         totalscore = totalscore + namescore + 10;
        }
        else {
