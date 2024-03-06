@@ -12,7 +12,7 @@ const multer = require("multer");
 app.use(logger("dev"));
 
 
-app.use("/links", express.static(path.join(__dirname, "public/uploads")));
+app.use("/link", express.static(path.join(__dirname, "public/uploads")));
 
 mongo.connect(process.env.mongo).then(() => {
     console.log("connected to mongo!!");
