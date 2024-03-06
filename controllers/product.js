@@ -116,8 +116,8 @@ axios.request(options)
 
     const totalconfidence = Math.round(confidence * 10) / 10;
 
-    console.log(totalconfidence/length);
-    const a = Math.round((totalconfidence / length) * 10) / 10; 
+    console.log( "this is " + totalconfidence/length);
+    const a = totalconfidence / length; 
        if (a > 0.50) {
         console.log(a);
         totalscore = totalscore + namescore + 10;
