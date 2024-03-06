@@ -45,7 +45,7 @@ app.use((req,res,next)=>{
 app.use(express.json())
 app.use(cors({
     origin:"*",
-    credentials: true,
+    withcredentials: true,
 }
 ))
 app.use(cookiep())
@@ -60,28 +60,28 @@ app.use("/api/product",postRoutes);
 const likeRoutes = require("./routes/likes.js");
 app.use("/api/likes",likeRoutes);
 
-const axios = require("axios").default;
-const options = {
-  method: "POST",
-  url: "https://api.edenai.run/v2/image/object_detection",
-  headers: {
-    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjljMjE2YzgtYzI3Mi00YjFhLWExNDUtZTFiMzA4NDdiMWQ0IiwidHlwZSI6ImFwaV90b2tlbiJ9.DEUrNUrvb4AGs1dtKrBUvqoV_w2tzC7CdT0wYG5GyAU",
-  },
-  data: {
-    providers: "amazon",
-    file_url:  `https://nsut-backend-0f7548004ed1.herokuapp.com/links/iphone.png`,
-    fallback_providers: "",
-  },
-};
-axios
-  .request(options)
-  .then((response) => {
-    // console.log(response.data);
-    console.log(response.data.amazon);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+// const axios = require("axios").default;
+// const options = {
+//   method: "POST",
+//   url: "https://api.edenai.run/v2/image/object_detection",
+//   headers: {
+//     Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjljMjE2YzgtYzI3Mi00YjFhLWExNDUtZTFiMzA4NDdiMWQ0IiwidHlwZSI6ImFwaV90b2tlbiJ9.DEUrNUrvb4AGs1dtKrBUvqoV_w2tzC7CdT0wYG5GyAU",
+//   },
+//   data: {
+//     providers: "amazon",
+//     file_url:  `https://nsut-backend-0f7548004ed1.herokuapp.com/links/iphone.png`,
+//     fallback_providers: "",
+//   },
+// };
+// axios
+//   .request(options)
+//   .then((response) => {
+//     // console.log(response.data);
+//     console.log(response.data.amazon);
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
 
   /**
   {
