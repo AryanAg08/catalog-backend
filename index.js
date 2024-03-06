@@ -67,7 +67,7 @@ const options = {
   },
   data: {
     providers: "amazon",
-    file_url:  `http://localhost:5001/links/iphone.png`,
+    file_url:  `https://nsut-backend-0f7548004ed1.herokuapp.com/links/iphone.png`,
     fallback_providers: "",
   },
 };
