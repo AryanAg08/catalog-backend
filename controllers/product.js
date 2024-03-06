@@ -75,7 +75,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
  if (data.price) totalscore += 1;
  totalscore += score1;
 
- console.log(totalscore);
+ console.log("Final total score is" + totalscore);
  return Math.random(totalscore * 10) /10;
 }
 
