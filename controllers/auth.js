@@ -51,7 +51,7 @@ async function login (req,res) {
     console.log("user is available");
     // for (qq of RR1) {
          
-      const checkPassword=bcrypt.compareSync(req.body.password,qq.password)
+      const checkPassword=bcrypt.compareSync(req.body.password,RR1.password)
       if(!checkPassword) return res.status(400).json("Wrong password or username!")
       console.log(RR1._id);
       const token=jwt.sign({id:RR1._id},"secretkey")
