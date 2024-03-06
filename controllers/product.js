@@ -61,24 +61,24 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
 })
 }
 
- async function calculate_score (data) {
- // write all the logic for calculating score
-
- const score1 = await getImageScore(data.name, data.imgurl);
- let totalscore = 0;
-
- if (data.desc) totalscore += 3;
- if (data.location) totalscore += 4;
- if (data.name) totalscore += 1;
- if (data.imgurl) totalscore +=1;
- if (data.catalog) totalscore +=1;
- if (data.price) totalscore += 1;
- totalscore += score1;
-
- console.log("Final total score is" + totalscore);
- return Math.random(totalscore * 10) /10;
-}
-
+async function calculate_score (data) {
+    // write all the logic for calculating score
+  
+    const score1 = await getImageScore(data.name, data.imgurl);
+    let totalscore = 0; // Initialize totalscore to 0
+  
+    if (data.desc) totalscore += 3;
+    if (data.location) totalscore += 4;
+    if (data.name) totalscore += 1;
+    if (data.imgurl) totalscore += 1;
+    if (data.catalog) totalscore += 1;
+    if (data.price) totalscore += 1;
+    totalscore += score1;
+  
+    console.log("Final total score is" + totalscore);
+    return Math.random(totalscore * 10) / 10;
+  }
+  
 
 async function getImageScore(name, imgurl) {
  // Image scoring logic here!! 
