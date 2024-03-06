@@ -1,7 +1,7 @@
 const R1 = require("../models/2.product");
 const jwt = require("jsonwebtoken");
 async function getProducts (req,res) {
-    const token=req.body.accessToken;
+    const token=req.body.token;
     if(!token) return res.status(401).json("Not logged in!");
     jwt.verify(token,"secretkey",async(err,userInfo)=>{
 
@@ -18,7 +18,8 @@ async function getProducts (req,res) {
 }
 //SELECT p.*,u.id AS userId,name,profilePic FROM posts AS p JOIN users AS u ON (u.id=p.userid) LEFT JOIN relationships AS r ON (p.userid=r.followedid) WHERE r.followerid=? OR p.userid=?
 async function addProduct (req,res) {
-    const token=req.cookies.accessToken;
+    console.log(req.body)
+    const token=req.body.token;
     console.log(token);
     if(!token) return res.status(401).json("Not logged in!");
 jwt.verify(token,"secretkey",(err,userInfo)=>{
