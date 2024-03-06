@@ -47,16 +47,16 @@ app.use(cors({
 }
 ))
 app.use(cookiep())
-// const userRoutes = require("./routes/users.js");
-// app.use("/api/users",userRoutes);
+const userRoutes = require("./routes/users.js");
+app.use("/api/users",userRoutes);
 const authRoutes = require("./routes/auth.js");
 app.use("/api/auth",authRoutes);
-// const CommentRoutes = require("./routes/comments.js");
-// app.use("/api/comments",CommentRoutes);
-// const postRoutes = require("./routes/product.js");
-// app.use("/api/product",postRoutes);
-// const likeRoutes = require("./routes/likes.js");
-// app.use("/api/likes",likeRoutes);
+const CommentRoutes = require("./routes/comments.js");
+app.use("/api/comments",CommentRoutes);
+const postRoutes = require("./routes/product.js");
+app.use("/api/product",postRoutes);
+const likeRoutes = require("./routes/likes.js");
+app.use("/api/likes",likeRoutes);
 
 const axios = require("axios").default;
 const options = {
@@ -74,7 +74,7 @@ const options = {
 axios
   .request(options)
   .then((response) => {
-    console.log(response.data);
+    // console.log(response.data);
     console.log(response.data.amazon);
   })
   .catch((error) => {
