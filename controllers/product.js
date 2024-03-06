@@ -27,7 +27,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
     const products = req.body;
     products.property.forEach(async (product) => {
         console.log(product)
-    //     console.log(userInfo.id)
+       console.log(userInfo.id)
     // // const q="INSERT INTO product(`name`,`catogary`,`price`,`imgURL`,`location`,`userid`) VALUES (?)";
     // // const values=[
     // //     product.name,
@@ -42,23 +42,24 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
     // //     return res.status(200).json("Product has been Added");
     // // })
 
-    // const RR2 = await R1.findOneAndUpdate({
-    //     userid: userInfo.id,
-    //     product_name:  product.product_name,
-    // },{
-    //     catalog_name: product.catalog_name,
-    //     product_name: product.product_name,
-    //     product_price: product.product_price,
-    //     userid: userInfo.id,
-    //     product_quantity: product.product_quantity,
-    //     product_imgurl: product.product_imgurl,
-    //     product_location: product.product_location,
-    // },{
-    //     upsert: true,
-    //     new: true,
-    // }).then(() => {
-    //     return res.status(200).json("Product has been Added");
-    // })
+    const RR2 = await R1.findOneAndUpdate({
+        userid: userInfo.id,
+        product_name:  product.name,
+    },{
+        catalog_name: res.body.catname,
+        product_name: product.name,
+        product_price: product.price,
+        userid: userInfo.id,
+        product_quantity: product.desc,
+        product_imgurl: product.imgURL,
+        product_location: product.location,
+    },{
+        upsert: true,
+        new: true,
+    }).then(() => {
+        return res.status(200).json("Product has been Added");
+    })
+    console.log(RR2);
 })
 })
 }
