@@ -126,7 +126,7 @@ axios.request(options)
         totalscore = totalscore + namescore + 4;
        }
 
-    // console.log(namescore);
+    console.log(totalscore);
 
     return totalscore;
 })
