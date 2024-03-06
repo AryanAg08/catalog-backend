@@ -33,6 +33,7 @@ const upload = multer({ storage: storage });
 
 app.use("/api/upload",upload.single("file"),(req,res)=>{
     const file=req.file;
+    const catlog_name = req.name;
     console.log(file)
     res.status(200).json(file.filename)
 })

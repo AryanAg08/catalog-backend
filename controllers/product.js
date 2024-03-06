@@ -61,6 +61,28 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
 })
 }
 
+async function calculate_score (data) {
+ // write all the logic for calculating score
+}
+
+
+async function getImageScore(name, imgurl) {
+ // Image scoring logic here!! 
+const axios = require("axios");
+const options = {
+    method: "POST",
+    url: "https://api.edenai.run/v2/image/object_detection",
+  headers: {
+    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjljMjE2YzgtYzI3Mi00YjFhLWExNDUtZTFiMzA4NDdiMWQ0IiwidHlwZSI6ImFwaV90b2tlbiJ9.DEUrNUrvb4AGs1dtKrBUvqoV_w2tzC7CdT0wYG5GyAU",
+  },
+  data: {
+    providers: "amazon",
+    file_url:  `https://nsut-backend-0f7548004ed1.herokuapp.com/links/iphone.png`,
+    fallback_providers: "",
+  },
+}
+
+}
 module.exports = {
     getProducts,
     addProduct

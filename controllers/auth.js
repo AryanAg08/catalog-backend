@@ -16,7 +16,7 @@ const jwt = require("jsonwebtoken")
         const salt=bcrypt.genSaltSync(10);
   const hashPassword=bcrypt.hashSync(req.body.password,salt)
    // insert data
-   await R1.findOneAndUpdate({
+  const RRRR = await R1.findOneAndUpdate({
     username,
     email: req.body.email
    },{
@@ -28,7 +28,8 @@ const jwt = require("jsonwebtoken")
     new: true,
     upsert: true,
    }).then(() => {
-    return res.status(200).json("User has been created!");
+    return res.status(200).json(RRRR);
+
    })
 
  
