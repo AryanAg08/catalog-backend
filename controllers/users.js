@@ -1,7 +1,7 @@
 // import { db } from "../connect.js";
 const jwt = require("jsonwebtoken");
 
-export const getUser = (req, res) => {
+async function getUser (req, res)  {
   const userId = req.params.userId;
   const q = "SELECT * FROM user WHERE id=?";
 
@@ -11,3 +11,7 @@ export const getUser = (req, res) => {
   // //   return res.json(info);
   // });
 };
+
+module.exports = {
+  getUser
+}
