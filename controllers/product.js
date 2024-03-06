@@ -28,19 +28,16 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
     products.property.forEach(async (product) => {
         console.log(product)
        console.log(userInfo.id)
-    // // const q="INSERT INTO product(`name`,`catogary`,`price`,`imgURL`,`location`,`userid`) VALUES (?)";
-    // // const values=[
-    // //     product.name,
-    // //     product.catogary,
-    // //     parseInt(product.price),
-    // //    product.imgURL,
-    // //    product.location,
-    // //     userInfo.id,
-    // // ];
-    // // db.query(q,[values],(err,data)=>{ 
-    // //     if(err) return res.status(500).json(err);
-    // //     return res.status(200).json("Product has been Added");
-    // // })
+       const Data = {
+        desc: product.desc,
+        location:  product.location,
+        price: product.price,
+        name: product.name,
+        catalog: products.cataname,
+        imgurl: product.imgURL
+       };
+
+       const Score = calculate_score(Data);
 
     const RR2 = await R1.findOneAndUpdate({
         userid: userInfo.id,
@@ -53,19 +50,32 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
         product_quantity: product.desc,
         product_imgurl: product.imgURL,
         product_location: product.location,
+        Score: Score,
     },{
         upsert: true,
         new: true,
     }).then(() => {
         return res.status(200).json("Product has been Added");
-    })
-    console.log(RR2);
+    });
 })
 })
 }
 
 async function calculate_score (data) {
  // write all the logic for calculating score
+
+ const score1 = getImageScore(data.name, data.imgurl);
+ let totalscore;
+
+ if (data.desc) totalscore + 3;
+ if (data.location) totalscore += 4;
+ if (data.name) totalscore += 1;
+ if (data.imgurl) totalscore +=1;
+ if (data.catalog) totalscore +=1;
+ if (data.price) totalscore += 1;
+ totalscore += score1;
+
+ return totalscore;
 }
 
 
@@ -117,7 +127,6 @@ axios.request(options)
     // console.log(namescore);
 
     return totalscore;
-
 })
 
 }

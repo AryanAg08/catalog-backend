@@ -29,6 +29,10 @@ const mongo = require("mongoose");
     product_location: {
         type: String,
         required: true
+    },
+    Score: {
+        type: String,
+        required: true,
     }
  });
 
