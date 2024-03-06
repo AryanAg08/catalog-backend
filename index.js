@@ -20,6 +20,15 @@ mongo.connect(process.env.mongo).then(() => {
 
 // const  userRoutes = require()
 
+app.use(express.json())
+app.use(cors({
+    origin: 'http://localhost:5173',
+    // Access-Control-Allow-Origin: *,
+    credentials: true,
+}
+))
+app.use(cookiep())
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "./public/uploads")
@@ -42,14 +51,7 @@ app.use((req,res,next)=>{
     res.header("Access-Control-Allow-Credentials",true)
     next()
 })
-app.use(express.json())
-app.use(cors({
-    origin: 'http://localhost:5173',
-    // Access-Control-Allow-Origin: *,
-    credentials: true,
-}
-))
-app.use(cookiep())
+
 const userRoutes = require("./routes/users.js");
 app.use("/api/users",userRoutes);
 const authRoutes = require("./routes/auth.js");
