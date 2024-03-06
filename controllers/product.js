@@ -67,7 +67,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
  const score1 = await getImageScore(data.name, data.imgurl);
  let totalscore = 0;
 
- if (data.desc) totalscore + 3;
+ if (data.desc) totalscore += 3;
  if (data.location) totalscore += 4;
  if (data.name) totalscore += 1;
  if (data.imgurl) totalscore +=1;
