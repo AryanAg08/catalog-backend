@@ -80,58 +80,115 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
     return Math.random(totalscore * 10) / 10;
   }
   
-function getImageScore(name, imgurl) {
- // Image scoring logic here!! 
-const axios = require("axios");
-const options = {
-    method: "POST",
-    url: "https://api.edenai.run/v2/image/object_detection",
-  headers: {
-    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjljMjE2YzgtYzI3Mi00YjFhLWExNDUtZTFiMzA4NDdiMWQ0IiwidHlwZSI6ImFwaV90b2tlbiJ9.DEUrNUrvb4AGs1dtKrBUvqoV_w2tzC7CdT0wYG5GyAU",
-  },
-  data: {
-    providers: "amazon",
-    file_url:  imgurl,
-    fallback_providers: "",
-  },
-}
+// function getImageScore(name, imgurl) {
+//  // Image scoring logic here!! 
+// const axios = require("axios");
+// const options = {
+//     method: "POST",
+//     url: "https://api.edenai.run/v2/image/object_detection",
+//   headers: {
+//     Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjljMjE2YzgtYzI3Mi00YjFhLWExNDUtZTFiMzA4NDdiMWQ0IiwidHlwZSI6ImFwaV90b2tlbiJ9.DEUrNUrvb4AGs1dtKrBUvqoV_w2tzC7CdT0wYG5GyAU",
+//   },
+//   data: {
+//     providers: "amazon",
+//     file_url:  imgurl,
+//     fallback_providers: "",
+//   },
+// }
 
-axios.request(options)
-.then((response) => {
-    // get  object from response and check if it is an image
-    // console.log(response.data.amazon.items);
-    const length = response.data.amazon.items.reduce((a, obj) => a + Object.keys(obj).length, 0) / 6;
-    var namescore = 8;
-    let confidence = 0;
-    let totalscore = 0;
+// axios.request(options)
+// .then((response) => {
+//     // get  object from response and check if it is an image
+//     // console.log(response.data.amazon.items);
+//     const length = response.data.amazon.items.reduce((a, obj) => a + Object.keys(obj).length, 0) / 6;
+//     var namescore = 8;
+//     let confidence = 0;
+//     let totalscore = 0;
 
-    response.data.amazon.items.forEach(obj => {
-        // console.log("Label:", obj.label);
-        // console.log("Confidence:", obj.confidence);
-        if (obj.label == name) {
-                    namescore = 15;
-                }
-                confidence = confidence + obj.confidence;
-      });
+//     response.data.amazon.items.forEach(obj => {
+//         // console.log("Label:", obj.label);
+//         // console.log("Confidence:", obj.confidence);
+//         if (obj.label == name) {
+//                     namescore = 15;
+//                 }
+//                 confidence = confidence + obj.confidence;
+//       });
 
-    const totalconfidence = Math.round(confidence * 10) / 10;
+//     const totalconfidence = Math.round(confidence * 10) / 10;
 
-    console.log( "this is " + totalconfidence/length);
-    const a = totalconfidence / length; 
-       if (a > 0.50) {
-        console.log(a);
-        totalscore += namescore + 10;
-       }
-       else {
-        totalscore +=  namescore + 4;
-       }
+//     console.log( "this is " + totalconfidence/length);
+//     const a = totalconfidence / length; 
+//        if (a > 0.50) {
+//         console.log(a);
+//         totalscore += namescore + 10;
+//        }
+//        else {
+//         totalscore +=  namescore + 4;
+//        }
 
-    console.log("Totalscore from last side"+totalscore);
+//     console.log("Totalscore from last side"+totalscore);
       
-    return totalscore;
-})
+//     return totalscore;
+// })
 
+// }
+
+function getImageScore(name, imgurl) {
+    return new Promise((resolve, reject) => {
+        const axios = require("axios");
+        const options = {
+            method: "POST",
+            url: "https://api.edenai.run/v2/image/object_detection",
+            headers: {
+                Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjljMjE2YzgtYzI3Mi00YjFhLWExNDUtZTFiMzA4NDdiMWQ0IiwidHlwZSI6ImFwaV90b2tlbiJ9.DEUrNUrvb4AGs1dtKrBUvqoV_w2tzC7CdT0wYG5GyAU",
+            },
+            data: {
+                providers: "amazon",
+                file_url: imgurl,
+                fallback_providers: "",
+            },
+        };
+
+        axios.request(options)
+            .then((response) => {
+                // get object from response and check if it is an image
+                // console.log(response.data.amazon.items);
+                const length = response.data.amazon.items.reduce((a, obj) => a + Object.keys(obj).length, 0) / 6;
+                var namescore = 8;
+                let confidence = 0;
+                let totalscore = 0;
+
+                response.data.amazon.items.forEach(obj => {
+                    // console.log("Label:", obj.label);
+                    // console.log("Confidence:", obj.confidence);
+                    if (obj.label == name) {
+                        namescore = 15;
+                    }
+                    confidence = confidence + obj.confidence;
+                });
+
+                const totalconfidence = Math.round(confidence * 10) / 10;
+
+                console.log("this is " + totalconfidence / length);
+                const a = totalconfidence / length;
+                if (a > 0.50) {
+                    console.log(a);
+                    totalscore += namescore + 10;
+                }
+                else {
+                    totalscore += namescore + 4;
+                }
+
+                console.log("Totalscore from last side" + totalscore);
+
+                resolve(totalscore); // Resolve with the totalscore value
+            })
+            .catch((error) => {
+                reject(error); // Reject with the error if any
+            });
+    });
 }
+
 module.exports = {
     getProducts,
     addProduct,
