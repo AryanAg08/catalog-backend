@@ -65,6 +65,7 @@ async function calculate_score (data) {
     // write all the logic for calculating score
   
     const score1 = await getImageScore(data.name, data.imgurl);
+    console.log("data coming" + score1);
     let totalscore = 0; // Initialize totalscore to 0
   
     if (data.desc) totalscore += 3;
