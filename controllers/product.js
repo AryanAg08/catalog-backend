@@ -46,7 +46,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
         userid: userInfo.id,
         product_name:  product.name,
     },{
-        catalog_name: res.body.cataname,
+        catalog_name: products.cataname,
         product_name: product.name,
         product_price: product.price,
         userid: userInfo.id,
