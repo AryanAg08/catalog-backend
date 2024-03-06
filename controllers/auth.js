@@ -27,8 +27,9 @@ const jwt = require("jsonwebtoken")
    },{
     new: true,
     upsert: true,
-   }).then(() => {
-    return res.status(200).json(RRRR);
+   }).then((data) => {
+    console.log(data);
+    return res.status(200).json(data);
 
    })
 
