@@ -35,16 +35,33 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
       cb(null, Date.now()+file.originalname)
-    }
-  })
+}
+});
+
+const storage2 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/csv")
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now()+file.originalname)
+  }
+});
 
 const upload = multer({ storage: storage });
+const upload2 = multer({ storage: storage2 });
 
 app.use("/api/upload",upload.single("file"),(req,res)=>{
     const file=req.file;
     const catlog_name = req.name;
     console.log(file)
     res.status(200).send(file.filename)
+})
+
+app.use("/api/upload/csv",upload2.single("file"),(req,res)=>{
+  const file=req.file;
+  const catlog_name = req.name;
+  console.log(file)
+  res.status(200).send(file.filename)
 })
 
 app.use((req,res,next)=>{
