@@ -25,7 +25,7 @@ async function addProduct (req,res) {
 jwt.verify(token,"secretkey",(err,userInfo)=>{
     if(err) return res.status(403).json("Token is invalid");
     const products = req.body;
-    products.forEach(async (product) => {
+    products.property.forEach(async (product) => {
         console.log(product)
     //     console.log(userInfo.id)
     // // const q="INSERT INTO product(`name`,`catogary`,`price`,`imgURL`,`location`,`userid`) VALUES (?)";
