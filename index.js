@@ -35,7 +35,7 @@ app.use("/api/upload",upload.single("file"),(req,res)=>{
     const file=req.file;
     const catlog_name = req.name;
     console.log(file)
-    res.status(200).json(file.filename)
+    res.status(200).send(file.filename)
 })
 
 app.use((req,res,next)=>{
