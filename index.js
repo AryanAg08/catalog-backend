@@ -87,7 +87,7 @@ app.use("/api/likes",likeRoutes);
 //     console.error(error);
 //   });
 
-getImageScore("Iphone", "https://nsut-backend-0f7548004ed1.herokuapp.com/links/iphone.png");
+// getImageScore("Iphone", "https://nsut-backend-0f7548004ed1.herokuapp.com/links/iphone.png");
 
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT} `)
