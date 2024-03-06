@@ -25,40 +25,40 @@ async function addProduct (req,res) {
 jwt.verify(token,"secretkey",(err,userInfo)=>{
     if(err) return res.status(403).json("Token is invalid");
     const products = req.body;
-    products[0].forEach(async (product) => {
+    products.forEach(async (product) => {
         console.log(product)
-        console.log(userInfo.id)
-    // const q="INSERT INTO product(`name`,`catogary`,`price`,`imgURL`,`location`,`userid`) VALUES (?)";
-    // const values=[
-    //     product.name,
-    //     product.catogary,
-    //     parseInt(product.price),
-    //    product.imgURL,
-    //    product.location,
-    //     userInfo.id,
-    // ];
-    // db.query(q,[values],(err,data)=>{ 
-    //     if(err) return res.status(500).json(err);
+    //     console.log(userInfo.id)
+    // // const q="INSERT INTO product(`name`,`catogary`,`price`,`imgURL`,`location`,`userid`) VALUES (?)";
+    // // const values=[
+    // //     product.name,
+    // //     product.catogary,
+    // //     parseInt(product.price),
+    // //    product.imgURL,
+    // //    product.location,
+    // //     userInfo.id,
+    // // ];
+    // // db.query(q,[values],(err,data)=>{ 
+    // //     if(err) return res.status(500).json(err);
+    // //     return res.status(200).json("Product has been Added");
+    // // })
+
+    // const RR2 = await R1.findOneAndUpdate({
+    //     userid: userInfo.id,
+    //     product_name:  product.product_name,
+    // },{
+    //     catalog_name: product.catalog_name,
+    //     product_name: product.product_name,
+    //     product_price: product.product_price,
+    //     userid: userInfo.id,
+    //     product_quantity: product.product_quantity,
+    //     product_imgurl: product.product_imgurl,
+    //     product_location: product.product_location,
+    // },{
+    //     upsert: true,
+    //     new: true,
+    // }).then(() => {
     //     return res.status(200).json("Product has been Added");
     // })
-
-    const RR2 = await R1.findOneAndUpdate({
-        userid: userInfo.id,
-        product_name:  product.product_name,
-    },{
-        catalog_name: product.catalog_name,
-        product_name: product.product_name,
-        product_price: product.product_price,
-        userid: userInfo.id,
-        product_quantity: product.product_quantity,
-        product_imgurl: product.product_imgurl,
-        product_location: product.product_location,
-    },{
-        upsert: true,
-        new: true,
-    }).then(() => {
-        return res.status(200).json("Product has been Added");
-    })
 })
 })
 }
