@@ -49,16 +49,18 @@ async function login (req,res) {
    }
    else {
     console.log("user is available");
+    console.log(await RR1);
     // for (qq of RR1) {
          
       const checkPassword=bcrypt.compareSync(req.body.password,RR1.password)
       if(!checkPassword) return res.status(400).json("Wrong password or username!")
       console.log(RR1._id);
       const token=jwt.sign({id:RR1._id},"secretkey")
+      console.log(token)
     const{password,...others}= RR1;
     res.cookie("accessToken",token,{
       httpOnly:true,
-    }).status(200).json(others);
+    }).status(200).json(RR1);
     }
     // }
  
