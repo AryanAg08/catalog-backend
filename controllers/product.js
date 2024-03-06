@@ -77,7 +77,7 @@ async function calculate_score (data) {
     totalscore += score1;
   
     console.log("Final total score is" + totalscore);
-    return Math.random(totalscore * 10) / 10;
+    return totalscore ;
   }
   
 // function getImageScore(name, imgurl) {
