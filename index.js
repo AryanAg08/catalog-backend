@@ -44,7 +44,8 @@ app.use((req,res,next)=>{
 })
 app.use(express.json())
 app.use(cors({
-    origin: "*",
+    origin: '*',
+    // Access-Control-Allow-Origin: *,
     credentials: true,
 }
 ))
