@@ -61,7 +61,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
 })
 }
 
-async function calculate_score (data) {
+ function calculate_score (data) {
     // write all the logic for calculating score
   
     const score1 = getImageScore(data.name, data.imgurl);
@@ -80,8 +80,7 @@ async function calculate_score (data) {
     return Math.random(totalscore * 10) / 10;
   }
   
-
-async function getImageScore(name, imgurl) {
+function getImageScore(name, imgurl) {
  // Image scoring logic here!! 
 const axios = require("axios");
 const options = {
