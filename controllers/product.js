@@ -121,14 +121,14 @@ axios.request(options)
     const a = totalconfidence / length; 
        if (a > 0.50) {
         console.log(a);
-        totalscore = totalscore + namescore + 10;
+        totalscore += namescore + 10;
        }
        else {
-        totalscore = totalscore + namescore + 4;
+        totalscore +=  namescore + 4;
        }
 
-    console.log(totalscore);
-
+    console.log("Totalscore from last side"+totalscore);
+      
     return totalscore;
 })
 
