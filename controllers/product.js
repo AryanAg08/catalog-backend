@@ -13,6 +13,7 @@ async function getProducts (req,res) {
             return res.status(200).json(RR1);
         }
         console.log(userInfo)
+        return res.status(404).json("not found!!")
     })
 }
 //SELECT p.*,u.id AS userId,name,profilePic FROM posts AS p JOIN users AS u ON (u.id=p.userid) LEFT JOIN relationships AS r ON (p.userid=r.followedid) WHERE r.followerid=? OR p.userid=?
