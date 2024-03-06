@@ -40,7 +40,7 @@ const jwt = require("jsonwebtoken")
 async function login (req,res) {
   const username = req.body.username;
 
-  const RR1 = await R1.find({
+  const RR1 = await R1.findOne({
     username
    })
 
@@ -49,17 +49,18 @@ async function login (req,res) {
    }
    else {
     console.log("user is available");
-    for (qq of RR1) {
+    // for (qq of RR1) {
          
       const checkPassword=bcrypt.compareSync(req.body.password,qq.password)
       if(!checkPassword) return res.status(400).json("Wrong password or username!")
-      const token=jwt.sign({id:qq._id},"secretkey")
+      console.log(RR1._id);
+      const token=jwt.sign({id:RR1._id},"secretkey")
     const{password,...others}=qq;
     res.cookie("accessToken",token,{
       httpOnly:true,
     }).status(200).json(others);
     }
-    }
+    // }
  
 }
 async function logout (req,res) {

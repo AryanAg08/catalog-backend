@@ -87,7 +87,9 @@ axios.request(options)
 .then((response) => {
     // get  object from response and check if it is an image
     console.log(response.data.amazon.items);
-    const length = response.data.amazon.items.reduce((a, obj) => a + Object.keys(obj).length, 0);
+    const length = response.data.amazon.items.reduce((a, obj) => a + Object.keys(obj).length, 0) / 6;
+   // console.log(length/6);
+    
     //const length = .size();
     // const name = response.data.amazon.items
     let i;
