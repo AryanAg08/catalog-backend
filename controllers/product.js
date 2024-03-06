@@ -61,7 +61,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
 })
 }
 
-async function calculate_score (data) {
+ function calculate_score (data) {
  // write all the logic for calculating score
 
  const score1 = getImageScore(data.name, data.imgurl);
@@ -75,7 +75,7 @@ async function calculate_score (data) {
  if (data.price) totalscore += 1;
  totalscore += score1;
 
- return totalscore;
+ return Math.random(totalscore * 10) /10;
 }
 
 
