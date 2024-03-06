@@ -55,7 +55,7 @@ async function login (req,res) {
       if(!checkPassword) return res.status(400).json("Wrong password or username!")
       console.log(RR1._id);
       const token=jwt.sign({id:RR1._id},"secretkey")
-    const{password,...others}=qq;
+    const{password,...others}= RR1;
     res.cookie("accessToken",token,{
       httpOnly:true,
     }).status(200).json(others);
