@@ -19,6 +19,7 @@ async function getProducts (req,res) {
 //SELECT p.*,u.id AS userId,name,profilePic FROM posts AS p JOIN users AS u ON (u.id=p.userid) LEFT JOIN relationships AS r ON (p.userid=r.followedid) WHERE r.followerid=? OR p.userid=?
 async function addProduct (req,res) {
     const token=req.cookies.accessToken;
+    console.log(token);
     if(!token) return res.status(401).json("Not logged in!");
 jwt.verify(token,"secretkey",(err,userInfo)=>{
     if(err) return res.status(403).json("Token is invalid");
@@ -82,8 +83,39 @@ const options = {
   },
 }
 
+axios.request(options)
+.then((response) => {
+    // get  object from response and check if it is an image
+    console.log(response.data.amazon.items);
+    const length = response.data.amazon.items.reduce((a, obj) => a + Object.keys(obj).length, 0);
+    //const length = .size();
+    // const name = response.data.amazon.items
+    let i;
+    var namescore = 8;
+    let confidence = 0;
+    // for (i = 0; i <length; i++) {
+    //    
+    // }
+
+    response.data.amazon.items.forEach(obj => {
+        console.log("Label:", obj.label);
+        console.log("Confidence:", obj.confidence);
+        if (obj.label == name) {
+                    namescore = 15;
+                }
+                confidence = confidence + obj.confidence;
+      });
+
+    const totalconfidence = Math.round(confidence * 10) / 10;
+
+    console.log(totalconfidence/length);
+    console.log(namescore);
+
+})
+
 }
 module.exports = {
     getProducts,
-    addProduct
+    addProduct,
+    getImageScore
 }

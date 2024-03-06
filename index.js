@@ -58,6 +58,7 @@ app.use("/api/auth",authRoutes);
 const postRoutes = require("./routes/product.js");
 app.use("/api/product",postRoutes);
 const likeRoutes = require("./routes/likes.js");
+const { getImageScore } = require("./controllers/product.js");
 app.use("/api/likes",likeRoutes);
 
 // const axios = require("axios").default;
@@ -83,22 +84,59 @@ app.use("/api/likes",likeRoutes);
 //     console.error(error);
 //   });
 
-  /**
-  {
-  amazon: {
-    status: 'success',
-    items: [ [Object], [Object], [Object], [Object] ],
-    cost: 0.001
-  },
-  google: { status: 'success', items: [ [Object] ], cost: 0.00225 },
-  'eden-ai': {
-    status: 'success',
-    items: [ [Object], [Object], [Object], [Object], [Object] ]
-  }
-}
-
-  */
+getImageScore("Iphone", "https://nsut-backend-0f7548004ed1.herokuapp.com/links/iphone.png");
 
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT} `)
 })
+
+
+/**
+ * 
+ * {
+   status: 'success',
+   items: [
+     {
+       label: 'Electronics',
+       confidence: 0.9999581909179688,
+       x_min: null,
+       x_max: null,
+       y_min: null,
+       y_max: null
+     },
+     {
+     label: 'Mobile Phone',
+       confidence: 0.9999581909179688,
+       x_min: null,
+       x_max: null,
+       y_min: null,
+       y_max: null
+     },
+     {
+       label: 'Phone',
+       confidence: 0.9999581909179688,
+       x_min: null,
+      x_max: null,
+       y_min: null,
+      y_max: null
+     },
+     {
+       label: 'Iphone',
+       confidence: 0.9966401672363281,
+       x_min: null,
+       x_max: null,
+       y_min: null,
+       y_max: null
+     },
+     {
+       label: 'Disk',
+       confidence: 0.9083155059814453,
+       x_min: 0.1579134464263916,
+       x_max: 0.8444782495498657,
+       y_min: 0.04748363420367241,
+       y_max: 0.9531964175403118
+     }
+   ],
+   cost: 0.001
+ }
+ */
