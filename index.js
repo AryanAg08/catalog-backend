@@ -10,7 +10,7 @@ const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
 const csv = require("csv-parser")
-const fileuploadpath = "./public/uploads/"
+let fileuploadpath = "./public/uploads/"
 // const { getImageScore } = require("./controllers/product.js");
 
 app.use(logger("dev"));
