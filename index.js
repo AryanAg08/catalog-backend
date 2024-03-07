@@ -85,7 +85,7 @@ app.use("/api/upload",upload.single("file"),(req,res)=>{
 //     });
   
 // })
-app.use("/api/upload/csv", upload2.single("file"), (req, res) => {
+app.use("/api/csv", upload2.single("file"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
