@@ -4,7 +4,7 @@ async function getProducts (req,res) {
     const token=req.query;
     if(!token) return res.status(401).json("Not logged in!");
     jwt.verify(token,"secretkey",async(err,userInfo)=>{
-
+            console.log(userInfo);
         const RR1 = await R1.find({
             userid: userInfo.id,
         })
