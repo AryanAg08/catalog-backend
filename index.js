@@ -9,7 +9,9 @@ const logger = require("morgan");
 const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
-const csvParser = require("csv-parser")
+const csv = require("csv-parser")
+const fileuploadpath = "./public/uploads/"
+// const { getImageScore } = require("./controllers/product.js");
 
 app.use(logger("dev"));
 
@@ -37,6 +39,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
       cb(null, Date.now()+file.originalname)
+      fileuploadpath += file.originalname;
 }
 });
 
@@ -46,6 +49,7 @@ const storage2 = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, Date.now()+file.originalname)
+    fileuploadpath += file.originalname;
   }
 });
 
@@ -85,24 +89,34 @@ app.use("/api/upload/csv", upload2.single("file"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
+   console.log("file recieved!!");
 
-  const file = req.file;
-  const catalogName = req.body.name; // Assuming the catalog name is sent in the request body
-
-  console.log("Uploaded file:", file);
-
-  // Use csv-parser to parse the CSV file
-  const results = [];
-  fs.createReadStream(file.path)
-    .pipe(csvParser())
-    .on('data', (data) => {
-      results.push(data);
-    })
-    .on('end', () => {
-      // Print the parsed data to the console
-      console.log("Parsed CSV data:", results);
-      res.status(200).send(file.filename);
-    });
+   const results = [];
+   const filename = fileUploadPath;
+   let totalScore = 0; // Initialize total score
+   
+   fs.createReadStream(filename)
+     .pipe(csv())
+     .on('headers', (headers) => {
+       headers.forEach((header) => {
+         csvSchema[header] = String;
+       });
+     })
+     .on('data', async (data) => {
+       results.push(data);
+       // Calculate score for each item and add to total score
+       const score = await getImageScore(data.name, data.imgURL); // Assuming getTotalScore function is defined
+       totalScore += score;
+     })
+     .on('end', async () => {
+       console.log('CSV file data:');
+       console.log(results);
+   
+       // Log total score
+       console.log('Total score:', totalScore);
+       res.send('Total score:', totalScore);
+     });
+  
 });
 
 app.use((req,res,next)=>{
