@@ -39,7 +39,8 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
       cb(null, Date.now()+file.originalname)
-      fileuploadpath += file.originalname;
+      const a = Date.now()+file.originalname
+      fileuploadpath += a;
 }
 });
 
@@ -49,7 +50,8 @@ const storage2 = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, Date.now()+file.originalname)
-    fileuploadpath += file.originalname;
+    const a = Date.now()+file.originalname
+    fileuploadpath += a;
   }
 });
 
