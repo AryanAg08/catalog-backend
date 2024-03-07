@@ -51,6 +51,7 @@ jwt.verify(token,"secretkey",(err,userInfo)=>{
         product_quantity: product.desc,
         product_imgurl: product.imgURL,
         product_location: product.location,
+        product_cat: product.category,
         Score: Score,
     },{
         upsert: true,

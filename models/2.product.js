@@ -30,6 +30,10 @@ const mongo = require("mongoose");
         type: String,
         required: true
     },
+    product_cat: {
+        type: String,
+        required: false,
+    },
     Score: {
         type: String,
         required: true,
