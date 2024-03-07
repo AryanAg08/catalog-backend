@@ -45,7 +45,7 @@ const storage = multer.diskStorage({
 
 const storage2 = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./public/csv")
+    cb(null, "./public/uploads")
   },
   filename: function (req, file, cb) {
     cb(null, Date.now()+file.originalname)
