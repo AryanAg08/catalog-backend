@@ -169,7 +169,8 @@ function getImageScore(name, imgurl) {
                     confidence = confidence + obj.confidence;
                 });
 
-                const totalconfidence = Math.round(confidence * 10) / 10;
+                // const totalconfidence = Math.round(confidence * 10) / 10;
+                const totalconfidence = confidence
 
                 console.log("this is " + totalconfidence / length);
                 const a = totalconfidence / length;
