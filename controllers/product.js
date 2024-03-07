@@ -1,7 +1,7 @@
 const R1 = require("../models/2.product");
 const jwt = require("jsonwebtoken");
 async function getProducts (req,res) {
-    const token=req.query;
+    const token=req.query.token;
     console.log(token);
     if(!token) return res.status(401).json("Not logged in!");
     jwt.verify(token,"secretkey",async(err,userInfo)=>{
