@@ -9,6 +9,7 @@ const logger = require("morgan");
 const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
+const csvParser = require("csvParser")
 
 app.use(logger("dev"));
 
@@ -64,7 +65,7 @@ app.use("/api/upload/csv",upload2.single("file"),(req,res)=>{
   console.log(file)
   res.status(200).send(file.filename);
 
-  const files = req.files.file;
+  const files = req.file;
 
   // Use csv-parser to parse the CSV file
   const results = [];
