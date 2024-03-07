@@ -26,7 +26,7 @@ mongo.connect(process.env.mongo).then(() => {
 
 app.use(express.json())
 app.use(cors({
-    origin: 'https://main--catlog-logger.netlify.app/',
+    origin: 'https://main--catlog-logger.netlify.app',
     // Access-Control-Allow-Origin: *,
     credentials: true,
 }
