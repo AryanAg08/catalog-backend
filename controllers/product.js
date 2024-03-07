@@ -175,7 +175,7 @@ function getImageScore(name, imgurl) {
                 const a = totalconfidence / length;
                 if (a > 0.50) {
                     console.log(a);
-                    totalscore += namescore + 10;
+                    totalscore += namescore + 10 + a;
                 }
                 else {
                     totalscore += namescore + 4;
