@@ -9,7 +9,7 @@ const logger = require("morgan");
 const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
-const csvParser = require("csvparser")
+const csvParser = require("csv-parser")
 
 app.use(logger("dev"));
 
@@ -59,28 +59,51 @@ app.use("/api/upload",upload.single("file"),(req,res)=>{
     res.status(200).send(file.filename)
 })
 
-app.use("/api/upload/csv",upload2.single("file"),(req,res)=>{
-  const file=req.file;
-  const catlog_name = req.name;
-  console.log(file)
-  res.status(200).send(file.filename);
+// app.use("/api/upload/csv",upload2.single("file"),(req,res)=>{
+//   const file=req.file;
+//   const catlog_name = req.name;
+//   console.log(file)
+//   res.status(200).send(file.filename);
 
-  const files = req.file;
+//   const files = req.file;
+
+//   // Use csv-parser to parse the CSV file
+//   const results = [];
+//   fs.createReadStream(files.path)
+//     .pipe(csvParser())
+//     .on('data', (data) => {
+//       results.push(data);
+//     })
+//     .on('end', () => {
+//       // `results` now contains the parsed data from the CSV file
+//       // res.json({ data: results });
+//       console.log(results);
+//     });
+  
+// })
+app.use("/api/upload/csv", upload2.single("file"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  const file = req.file;
+  const catalogName = req.body.name; // Assuming the catalog name is sent in the request body
+
+  console.log("Uploaded file:", file);
 
   // Use csv-parser to parse the CSV file
   const results = [];
-  fs.createReadStream(files.path)
+  fs.createReadStream(file.path)
     .pipe(csvParser())
     .on('data', (data) => {
       results.push(data);
     })
     .on('end', () => {
-      // `results` now contains the parsed data from the CSV file
-      // res.json({ data: results });
-      console.log(results);
+      // Print the parsed data to the console
+      console.log("Parsed CSV data:", results);
+      res.status(200).send(file.filename);
     });
-  
-})
+});
 
 app.use((req,res,next)=>{
     res.header("Access-Control-Allow-Credentials",true)
