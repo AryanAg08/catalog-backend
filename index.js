@@ -99,11 +99,11 @@ app.use("/api/csv", upload2.single("file"), (req, res) => {
    
    fs.createReadStream(filename)
      .pipe(csv())
-     .on('headers', (headers) => {
-       headers.forEach((header) => {
-         csvSchema[header] = String;
-       });
-     })
+    //  .on('headers', (headers) => {
+    //   //  headers.forEach((header) => {
+    //   //    csvSchema[header] = String;
+    //   //  });
+    //  })
      .on('data', async (data) => {
        results.push(data);
        // Calculate score for each item and add to total score
