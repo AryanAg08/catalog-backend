@@ -107,12 +107,13 @@ app.use("/api/csv", upload2.single("file"), (req, res) => {
      .on('data', async (data) => {
        results.push(data);
        // Calculate score for each item and add to total score
-       const score = await getImageScore(results[0].name, results[0].imgURL); // Assuming getTotalScore function is defined
-       totalScore += score;
+      
      })
      .on('end', async () => {
        console.log('CSV file data:');
        console.log(results);
+       const score = await getImageScore(results[0].name, results[0].imgURL); // Assuming getTotalScore function is defined
+       totalScore += score;
    
        // Log total score
        console.log('Total score:', totalScore);
