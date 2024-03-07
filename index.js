@@ -76,7 +76,8 @@ app.use("/api/upload/csv",upload2.single("file"),(req,res)=>{
     })
     .on('end', () => {
       // `results` now contains the parsed data from the CSV file
-      res.json({ data: results });
+      // res.json({ data: results });
+      console.log(results);
     });
   
 })
