@@ -69,7 +69,7 @@ app.use("/api/upload/csv",upload2.single("file"),(req,res)=>{
 
   // Use csv-parser to parse the CSV file
   const results = [];
-  fs.createReadStream(files.tempFilePath)
+  fs.createReadStream(files.path)
     .pipe(csvParser())
     .on('data', (data) => {
       results.push(data);
