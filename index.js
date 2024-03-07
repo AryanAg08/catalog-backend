@@ -8,6 +8,7 @@ const mongo = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
 const multer = require("multer");
+const fs = require("fs");
 
 app.use(logger("dev"));
 
@@ -61,7 +62,22 @@ app.use("/api/upload/csv",upload2.single("file"),(req,res)=>{
   const file=req.file;
   const catlog_name = req.name;
   console.log(file)
-  res.status(200).send(file.filename)
+  res.status(200).send(file.filename);
+
+  const files = req.files.file;
+
+  // Use csv-parser to parse the CSV file
+  const results = [];
+  fs.createReadStream(files.tempFilePath)
+    .pipe(csvParser())
+    .on('data', (data) => {
+      results.push(data);
+    })
+    .on('end', () => {
+      // `results` now contains the parsed data from the CSV file
+      res.json({ data: results });
+    });
+  
 })
 
 app.use((req,res,next)=>{
