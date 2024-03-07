@@ -117,7 +117,7 @@ app.use("/api/csv", upload2.single("file"), (req, res) => {
    
        // Log total score
        console.log('Total score:', totalScore);
-       res.send(totalScore);
+       res.send(totalScore.toString());
      });
   
 });
