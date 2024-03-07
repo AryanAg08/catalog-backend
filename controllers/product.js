@@ -156,7 +156,7 @@ function getImageScore(name, imgurl) {
                 // get object from response and check if it is an image
                 // console.log(response.data.amazon.items);
                 const length = response.data.amazon.items.reduce((a, obj) => a + Object.keys(obj).length, 0) / 6;
-                var namescore = 8;
+                var namescore = 0;
                 let confidence = 0;
                 let totalscore = 0;
 
