@@ -92,7 +92,7 @@ app.use("/api/upload/csv", upload2.single("file"), (req, res) => {
    console.log("file recieved!!");
 
    const results = [];
-   const filename = fileUploadPath;
+   const filename = fileuploadpath;
    let totalScore = 0; // Initialize total score
    
    fs.createReadStream(filename)
